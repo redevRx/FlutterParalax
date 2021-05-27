@@ -2,8 +2,7 @@ name: paralax
 description: Flutter Paralax Card
 version: 0.0.6
 homepage: https://github.com/redevRx/FlutterParalax
-authors:
-  -redev.rx@gmail.com
+authors: Kasem Saikhuedong<redev.rx@gmail.com>
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
