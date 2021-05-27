@@ -1,7 +1,8 @@
 name: paralax
 description: Flutter Paralax Card
-version: 0.0.6
+version: 0.0.6+1
 homepage: https://github.com/redevRx/FlutterParalax
+repository: https://github.com/redevRx/FlutterParalax
 author: Kasem Saikhuedong<redev.rx@gmail.com>
 
 environment:
@@ -11,6 +12,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: ^0.22.0
 
 dev_dependencies:
   flutter_test:

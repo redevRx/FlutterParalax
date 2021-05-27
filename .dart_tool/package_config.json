@@ -50,6 +50,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_svg",
+      "rootUri": "file:///D:/Programs/ProgrammingLanguage/dart-sdk/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg-0.22.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///D:/Programs/ProgrammingLanguage/dart-sdk/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -70,6 +76,24 @@
     {
       "name": "path",
       "rootUri": "file:///D:/Programs/ProgrammingLanguage/dart-sdk/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_drawing",
+      "rootUri": "file:///D:/Programs/ProgrammingLanguage/dart-sdk/flutter/.pub-cache/hosted/pub.dartlang.org/path_drawing-0.5.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_parsing",
+      "rootUri": "file:///D:/Programs/ProgrammingLanguage/dart-sdk/flutter/.pub-cache/hosted/pub.dartlang.org/path_parsing-0.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "petitparser",
+      "rootUri": "file:///D:/Programs/ProgrammingLanguage/dart-sdk/flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-4.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -128,13 +152,19 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "xml",
+      "rootUri": "file:///D:/Programs/ProgrammingLanguage/dart-sdk/flutter/.pub-cache/hosted/pub.dartlang.org/xml-5.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "paralax",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-05-27T05:06:42.142510Z",
+  "generated": "2021-05-27T06:27:18.033857Z",
   "generator": "pub",
   "generatorVersion": "2.13.0"
 }

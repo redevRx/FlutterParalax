@@ -35,19 +35,24 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text("Paralax Card"),centerTitle: (0 == 0),),
+        appBar: AppBar(
+          title: Text("Paralax Card"),
+          centerTitle: (0 == 0),
+        ),
         body: SafeArea(
           child: Column(
             children: [
-              Expanded(child: ListView(
+              Expanded(
+                  child: ListView(
                 physics: BouncingScrollPhysics(),
                 children: List.generate(
                     15,
-                        (index) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4.0 , horizontal: 16),
+                    (index) => Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 4.0, horizontal: 16),
                           child: ParalaxContainer(
                             aspectRatio: 16 / 16,
-                            imageType: 0,
+                            type: ParalaxType.ASSETS,
                             imageUrl: "assets/rov/${index + 1}.jpg",
                             radius: 16,
                           ),
