@@ -56,7 +56,4 @@ imageUrl: "assets/rov/${index + 1}.jpg",
       ),
 ```
 
-### Example 
-<p>
-<img/>
-<p>
+
