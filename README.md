@@ -4,13 +4,13 @@ Flutter Paralax Card
 
 ### Install Package
 ``` dart
-paralax:any
-pub get
+
+dependencies:
+  paralax: ^any
 ```
 ### Example Code
 
 ``` dart
-
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
