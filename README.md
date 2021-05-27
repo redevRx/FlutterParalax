@@ -56,4 +56,7 @@ imageUrl: "assets/rov/${index + 1}.jpg",
       ),
 ```
 
-
+### Example 
+<p>
+<img src ="https://github.com/redevRx/FlutterParalax/blob/dev/demo.gif" width="200"/>
+</p>
