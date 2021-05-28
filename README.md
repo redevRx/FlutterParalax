@@ -6,7 +6,7 @@ Flutter Paralax Card
 ``` dart
 
 dependencies:
-  paralax: ^any
+  paralax: ^0.0.8+1
 ```
 ### Example Code
 
@@ -30,9 +30,18 @@ class MyHomePage extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 4.0 , horizontal: 16),
                           child: ParalaxContainer(
                             aspectRatio: 16 / 16,
-                            imageType: 0,
+                             type: ParalaxType.ASSETS,
                             imageUrl: "assets/rov/${index + 1}.jpg",
                             radius: 16,
+                            Positioned(
+                        bottom: 20,
+                        left: 20,
+                        child: Column(
+                          children: [
+                            Text("What Waht Waht")
+                          ],
+                        ),
+                      )
                           ),
                         )),
               ))
@@ -50,13 +59,15 @@ class MyHomePage extends StatelessWidget {
 ``` dart
 ParalaxContainer(
 aspectRatio: 16 / 16,
-imageType: 0,
+ type: ParalaxType.ASSETS,
 imageUrl: "assets/rov/${index + 1}.jpg",
  radius: 16,
       ),
 ```
 
-### Example 
+### Example
+<center>
 <a href="https://github.com/redevRx/FlutterParalax/tree/dev">
- <img src="https://github.com/redevRx/FlutterParalax/blob/dev/demo.gif" width="200"/>
+ <img src="https://github.com/redevRx/FlutterParalax/blob/dev/demo.gif?raw=true" width="200"/>
 </a>
+</center>

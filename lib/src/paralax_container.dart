@@ -13,10 +13,11 @@ import 'package:paralax/src/paralax_type.dart';
 class ParalaxContainer extends StatefulWidget {
   ParalaxContainer({
     Key? key,
-    @required this.imageUrl,
+    required this.imageUrl,
     this.aspectRatio,
     this.radius,
-    @required this.type = ParalaxType.ASSETS,
+    this.type = ParalaxType.ASSETS,
+    this.widgets = null,
   }) : super(key: key);
 
   ///
@@ -50,6 +51,22 @@ class ParalaxContainer extends StatefulWidget {
   final ParalaxType? type;
 
   ///
+  /// ### Body Widget
+  /// Require Position Widgets
+  /// ```dart
+  /// Positioned(
+  //        bottom: 20,
+  //        left: 20,
+  //        child: Column(
+  //        children: [
+  //        Text("What Waht Waht")
+  //                ],
+  //             ),
+  //            )
+  /// ```
+  final Widget? widgets;
+
+  ///
   ///[backgroundImageKey] key background image
   final GlobalKey backgroundImageKey = GlobalKey();
 
@@ -71,6 +88,7 @@ class _ParalaxContainerState extends State<ParalaxContainer> {
             _buildParallaxBackground(context),
             _buildGradient(),
             // _buildTitleAndSubtitle(),
+            widget.widgets ?? Container()
           ],
         ),
       ),
