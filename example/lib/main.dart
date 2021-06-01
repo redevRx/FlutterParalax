@@ -35,24 +35,59 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text("Paralax Card"),centerTitle: (0 == 0),),
+        appBar: AppBar(
+          title: Text("Paralax Card"),
+          centerTitle: (0 == 0),
+        ),
         body: SafeArea(
           child: Column(
             children: [
-              Expanded(child: ListView(
-                physics: BouncingScrollPhysics(),
-                children: List.generate(
-                    15,
-                        (index) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4.0 , horizontal: 16),
-                          child: ParalaxContainer(
-                            aspectRatio: 16 / 16,
-                            imageType: 0,
-                            imageUrl: "assets/rov/${index + 1}.jpg",
-                            radius: 16,
-                          ),
-                        )),
-              ))
+              Expanded(
+                  child: ListView(physics: BouncingScrollPhysics(), children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16),
+                  child: ParalaxContainer(
+                      aspectRatio: 16 / 16,
+                      type: ParalaxType.NETWORK,
+                      imageUrl:
+                          "https://i.pinimg.com/originals/34/b1/96/34b196575351e79f7c46bcf2c038a38a.png",
+                      radius: 16,
+                      widgets: Positioned(
+                        bottom: 20,
+                        left: 20,
+                        child: Column(
+                          children: [
+                            Text("What Waht Waht")
+                          ],
+                        ),
+                      )),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16),
+                  child: ParalaxContainer(
+                    aspectRatio: 16 / 16,
+                    type: ParalaxType.NETWORK,
+                    imageUrl:
+                        "https://i.pinimg.com/originals/39/a3/55/39a3553197db772513adede23615a82a.png",
+                    radius: 16,
+
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16),
+                  child: ParalaxContainer(
+                    aspectRatio: 16 / 16,
+                    type: ParalaxType.NETWORK,
+                    imageUrl:
+                        "https://i.pinimg.com/originals/04/6c/11/046c11a15bdbccd68ec8712be43cf965.jpg",
+                    radius: 16,
+
+                  ),
+                )
+              ]))
             ],
           ),
         ),

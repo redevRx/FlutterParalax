@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:paralax/src/paralax_type.dart';
 
 ///
 ///### Flutter Paralax Card
@@ -9,7 +11,15 @@ import 'package:flutter/rendering.dart';
 ///```
 ///
 class ParalaxContainer extends StatefulWidget {
-  ParalaxContainer({Key? key, this.imageUrl, this.aspectRatio, this.radius, this.imageType = 0}) : super(key: key);
+  ParalaxContainer({
+    Key? key,
+    required this.imageUrl,
+    this.aspectRatio,
+    this.radius,
+    this.type = ParalaxType.ASSETS,
+    this.widgets = null,
+  }) : super(key: key);
+
   ///
   ///[imageUrl] url image on server
   ///
@@ -24,40 +34,64 @@ class ParalaxContainer extends StatefulWidget {
   /// For example, a 16:9 width:height aspect ratio would have a value of 16.0/9.0.
   /// default is 16 / 16
   final double? aspectRatio;
+
   ///
   /// radius circle of image in paralax card
   /// default is 16
   final double? radius;
+
+  // ///
+  // /// ### Type Image
+  // /// type images 0 => image assets
+  // /// type images 1 => image network
+  /// final int imageType;
+  ///type image format
+  ///local image , image network , image svg
+  ///default value is ParalaxType.ASSETS
+  final ParalaxType? type;
+
   ///
-  /// ### Type Image 
-  /// type images 0 => image assets
-  /// type images 1 => image network
-  final int imageType;
+  /// ### Body Widget
+  /// Require Position Widgets
+  /// ```dart
+  /// Positioned(
+  //        bottom: 20,
+  //        left: 20,
+  //        child: Column(
+  //        children: [
+  //        Text("What Waht Waht")
+  //                ],
+  //             ),
+  //            )
+  /// ```
+  final Widget? widgets;
+
   ///
   ///[backgroundImageKey] key background image
   final GlobalKey backgroundImageKey = GlobalKey();
+
   ///
   @override
   _ParalaxContainerState createState() => _ParalaxContainerState();
 }
 
 class _ParalaxContainerState extends State<ParalaxContainer> {
-
   @override
   Widget build(BuildContext context) {
-    return  AspectRatio(
-          aspectRatio: widget.aspectRatio ?? 16 / 16,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(widget.radius ?? 16.0),
-            child: Stack(
-              children: [
-                //
-                _buildParallaxBackground(context),
-                _buildGradient(),
-                // _buildTitleAndSubtitle(),
-              ],
-            ),
-          ),
+    return AspectRatio(
+      aspectRatio: widget.aspectRatio ?? 16 / 16,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(widget.radius ?? 16.0),
+        child: Stack(
+          children: [
+            //
+            _buildParallaxBackground(context),
+            _buildGradient(),
+            // _buildTitleAndSubtitle(),
+            widget.widgets ?? Container()
+          ],
+        ),
+      ),
     );
   }
 
@@ -70,17 +104,31 @@ class _ParalaxContainerState extends State<ParalaxContainer> {
       ),
       children: [
         //
-       widget.imageType == 0 ? Image.asset(
-          widget.imageUrl!,
-          key: widget.backgroundImageKey,
-          fit: BoxFit.cover,
-          scale: 1,
-        )
-           : Image.network(
-         widget.imageUrl!,
-         key: widget.backgroundImageKey,
-         fit: BoxFit.cover,
-         scale: 1,),
+        widget.type == ParalaxType.ASSETS
+            ? Image.asset(
+                widget.imageUrl!,
+                key: widget.backgroundImageKey,
+                fit: BoxFit.cover,
+                scale: 1,
+              )
+            : widget.type == ParalaxType.NETWORK
+                ? Image.network(
+                    widget.imageUrl!,
+                    key: widget.backgroundImageKey,
+                    fit: BoxFit.cover,
+                    scale: 1,
+                  )
+                : widget.type == ParalaxType.SVGNETWORK
+                    ? SvgPicture.network(
+                        widget.imageUrl!,
+                        key: widget.backgroundImageKey,
+                        fit: BoxFit.cover,
+                      )
+                    : SvgPicture.asset(
+                        widget.imageUrl!,
+                        key: widget.backgroundImageKey,
+                        fit: BoxFit.cover,
+                      ),
       ],
     );
   }
@@ -136,7 +184,7 @@ class ParallaxFlowDelegate extends FlowDelegate {
     @required this.scrollable,
     @required this.listItemContext,
     @required this.backgroundImageKey,
-  }) : super(repaint:scrollable?.position);
+  }) : super(repaint: scrollable?.position);
 
   final ScrollableState? scrollable;
   final BuildContext? listItemContext;
@@ -162,7 +210,7 @@ class ParallaxFlowDelegate extends FlowDelegate {
     // scrollable area.
     final viewportDimension = scrollable!.position.viewportDimension;
     final scrollFraction =
-    (listItemOffset.dy / viewportDimension).clamp(0.0, 1.0);
+        (listItemOffset.dy / viewportDimension).clamp(0.0, 1.0);
 
     // Calculate the vertical alignment of the background
     // based on the scroll percent.
@@ -175,13 +223,13 @@ class ParallaxFlowDelegate extends FlowDelegate {
             .size;
     final listItemSize = context.size;
     final childRect =
-    verticalAlignment.inscribe(backgroundSize, Offset.zero & listItemSize);
+        verticalAlignment.inscribe(backgroundSize, Offset.zero & listItemSize);
 
     // Paint the background.
     context.paintChild(
       0,
       transform:
-      Transform.translate(offset: Offset(0.0, childRect.top)).transform,
+          Transform.translate(offset: Offset(0.0, childRect.top)).transform,
     );
   }
 
@@ -261,7 +309,7 @@ class RenderParallax extends RenderBox
     // and then scale its height based on the image's aspect ratio.
     final background = child;
     final backgroundImageConstraints =
-    BoxConstraints.tightFor(width: size.width);
+        BoxConstraints.tightFor(width: size.width);
     background!.layout(backgroundImageConstraints, parentUsesSize: true);
 
     // Set the background's local offset, which is zero.
@@ -276,12 +324,12 @@ class RenderParallax extends RenderBox
     // Calculate the global position of this list item.
     final scrollableBox = scrollable.context.findRenderObject() as RenderBox;
     final backgroundOffset =
-    localToGlobal(size.centerLeft(Offset.zero), ancestor: scrollableBox);
+        localToGlobal(size.centerLeft(Offset.zero), ancestor: scrollableBox);
 
     // Determine the percent position of this list item within the
     // scrollable area.
     final scrollFraction =
-    (backgroundOffset.dy / viewportDimension).clamp(0.0, 1.0);
+        (backgroundOffset.dy / viewportDimension).clamp(0.0, 1.0);
 
     // Calculate the vertical alignment of the background
     // based on the scroll percent.
@@ -293,7 +341,7 @@ class RenderParallax extends RenderBox
     final backgroundSize = background!.size;
     final listItemSize = size;
     final childRect =
-    verticalAlignment.inscribe(backgroundSize, Offset.zero & listItemSize);
+        verticalAlignment.inscribe(backgroundSize, Offset.zero & listItemSize);
 
     // Paint the background.
     context.paintChild(
